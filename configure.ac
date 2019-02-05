@@ -29,6 +29,7 @@ AC_SUBST(LIBZIP_VERSION)
 AC_SUBST(LIBCURL_VERSION)
 AC_SUBST(OPENSSL_VERSION)
 
+
 # Checks for programs.
 AC_PROG_CC
 AM_PROG_CC_C_O
@@ -42,6 +43,7 @@ PKG_CHECK_MODULES(libplist, libplist >= $LIBPLIST_VERSION)
 PKG_CHECK_MODULES(libzip, libzip >= $LIBZIP_VERSION)
 PKG_CHECK_MODULES(libcurl, libcurl >= $LIBCURL_VERSION)
 PKG_CHECK_MODULES(openssl, openssl >= $OPENSSL_VERSION)
+PKG_CHECK_MODULES(zlib, zlib)
 
 GLOBAL_CFLAGS=""
 AC_LDADD=""
@@ -50,6 +52,7 @@ case "$host_os" in
 	darwin*)
 	;;
 	linux*)
+	GLOBAL_CFLAGS+="-lpthread -lz"
 	;;
 	mingw*)
 		GLOBAL_CFLAGS+="-DWIN32 -D__LITTLE_ENDIAN__=1"
